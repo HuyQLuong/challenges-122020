@@ -1,30 +1,33 @@
 import { getIssuesService } from "services/issuesServices";
 
-export const GET_ISSUES = "GET_ISSUES"
-export const UPDATE_PAGE = "UPDATE_PAGE"
+export const GET_ISSUES = "GET_ISSUES";
+export const UPDATE_PAGE = "UPDATE_PAGE";
 
 const addIssues = (issuesList: any) => {
-	return {
+    return {
         type: GET_ISSUES,
-        payload: issuesList
-	};
+        payload: issuesList,
+    };
 };
 
-const updatePage = (page:any) =>{
+const updatePage = (page: any) => {
     return {
         type: UPDATE_PAGE,
-        payload: page
-    }
-}
+        payload: page,
+    };
+};
 
 export const getInitIssuesAction = () => async (dispatch: any) => {
-    const issuesList = await getIssuesService(1)
-    dispatch(addIssues(issuesList))
-    dispatch(updatePage(1))
-}
+    const issuesList = await getIssuesService(1);
+    dispatch(addIssues(issuesList));
+    dispatch(updatePage(1));
+};
 
-export const getIssuesAction = (page:any) => async (dispatch: any) => {
-    const issuesList = await getIssuesService(page)
-    dispatch(addIssues(issuesList))
-    dispatch(updatePage(page))
-}
+export const getIssuesAction = (page: any) => async (dispatch: any) => {
+    const issuesList = await getIssuesService(page);
+    dispatch(addIssues(issuesList));
+};
+
+export const updatePageAction = (page: any) => (dispatch: any) => {
+    dispatch(updatePage(page));
+};
