@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { createStyles, Theme, makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -33,7 +33,6 @@ const useStyles = makeStyles((theme: Theme) =>
         drawerPaper: {
             width: drawerWidth,
         },
-        // necessary for content to be below app bar
         toolbar: theme.mixins.toolbar,
         content: {
             flexGrow: 1,
@@ -44,7 +43,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export default function Drawers() {
-    const classes = useStyles();
+	const classes = useStyles();
     const [menuIndex, setMenuIndex] = useState(0);
     const onClickMenu = (index: number) => {
         if (index === 1) {
@@ -97,12 +96,13 @@ export default function Drawers() {
             </Drawer>
             <main className={classes.content}>
                 <div className={classes.toolbar} />
+				<span>{menuIndex}</span>
 				{
 					menuIndex === 1 ? (
-						<Issues></Issues>
+						<Feeds></Feeds>
 					) :
 					(
-						<Feeds></Feeds>
+						<Issues></Issues>
 					)
 				}
             </main>
