@@ -1,6 +1,13 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { Provider } from 'react-redux';
+import { Router } from "react-router-dom";
+import { store } from "configureStore";
+import { createBrowserHistory } from "history";
+
+const hist = createBrowserHistory();
+
 
 function App() {
   return (
@@ -23,4 +30,15 @@ function App() {
   );
 }
 
-export default App;
+const Root = () => {
+	return (
+		<Provider store={store}>
+			<Router history={hist}>
+				<App></App>
+			</Router>
+		</Provider>
+	);
+};
+
+
+export default Root;
