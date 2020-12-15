@@ -12,8 +12,8 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 import PriorityHighIcon from "@material-ui/icons/PriorityHigh";
-import Issues from "./issues"
-import Feeds from "./feeds"
+import Issues from "./issues";
+import Feeds from "./feeds";
 
 const drawerWidth = 240;
 
@@ -43,7 +43,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export default function Drawers() {
-	const classes = useStyles();
+    const classes = useStyles();
     const [menuIndex, setMenuIndex] = useState(0);
     const onClickMenu = (index: number) => {
         if (index === 1) {
@@ -59,7 +59,7 @@ export default function Drawers() {
             <AppBar position="fixed" className={classes.appBar}>
                 <Toolbar>
                     <Typography variant="h6" noWrap>
-                        Permanent drawer
+                        Github Issues
                     </Typography>
                 </Toolbar>
             </AppBar>
@@ -96,15 +96,7 @@ export default function Drawers() {
             </Drawer>
             <main className={classes.content}>
                 <div className={classes.toolbar} />
-				<span>{menuIndex}</span>
-				{
-					menuIndex === 1 ? (
-						<Feeds></Feeds>
-					) :
-					(
-						<Issues></Issues>
-					)
-				}
+                {menuIndex === 1 ? <Feeds></Feeds> : <Issues></Issues>}
             </main>
         </div>
     );
