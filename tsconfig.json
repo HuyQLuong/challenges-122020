@@ -7,7 +7,7 @@
       "dom.iterable",
       "esnext"
     ],
-    "jsx": "react-jsx",
+    "jsx": "react",
     "moduleResolution": "node",
     "baseUrl": "./src",
     "rootDir": "./src",
@@ -32,6 +32,6 @@
     "noFallthroughCasesInSwitch": true,
   },
   "include": [
-    "src"
+    "./src/**/*.ts"
   ]
 }
