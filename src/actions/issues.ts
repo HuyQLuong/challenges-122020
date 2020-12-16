@@ -35,13 +35,17 @@ const removeHighlightIssue = (idx: any) => {
 
 export const getInitIssuesAction = () => async (dispatch: any) => {
     const issuesList = await getIssuesService(1);
-    dispatch(addIssues(issuesList));
-    dispatch(updatePage(1));
+    if (issuesList.length > 0) {
+        dispatch(addIssues(issuesList));
+        dispatch(updatePage(1));
+    }
 };
 
 export const getIssuesAction = (page: any) => async (dispatch: any) => {
     const issuesList = await getIssuesService(page);
-    dispatch(addIssues(issuesList));
+    if (issuesList.length > 0) {
+        dispatch(addIssues(issuesList));
+    }
 };
 
 export const updatePageAction = (page: any) => (dispatch: any) => {
