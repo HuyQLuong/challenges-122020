@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import logo from "./logo.svg";
 import "./App.css";
 import { Provider, useDispatch } from "react-redux";
 import { Router } from "react-router-dom";
