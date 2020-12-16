@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { createStyles, Theme, makeStyles } from "@material-ui/core/styles";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import { Button, List, ListItem, ListItemText } from "@material-ui/core";
+import { List } from "@material-ui/core";
 import Pagination from "@material-ui/lab/Pagination";
 import { getIssuesAction, updatePageAction } from "actions/issues";
 import IssueItem from "./issueItem";
