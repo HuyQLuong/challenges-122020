@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { memo, useState } from "react";
 import { createStyles, Theme, makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -14,6 +14,8 @@ import InboxIcon from "@material-ui/icons/MoveToInbox";
 import PriorityHighIcon from "@material-ui/icons/PriorityHigh";
 import Issues from "./issues";
 import Feeds from "./feeds";
+import Notification from "./notification";
+import { shallowEqual, useSelector } from "react-redux";
 
 const drawerWidth = 240;
 
@@ -44,12 +46,20 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function Drawers() {
     const classes = useStyles();
+
+    const notificationNumber = 1;
     const [menuIndex, setMenuIndex] = useState(0);
     const onClickMenu = (index: number) => {
         if (index === 1) {
             setMenuIndex(1);
         } else {
             setMenuIndex(0);
+        }
+    };
+
+    const isNotificationComponent = (index: any) => {
+        if (index % 2 !== 0) {
+            return <Notification></Notification>;
         }
     };
 
@@ -90,6 +100,7 @@ export default function Drawers() {
                                 )}
                             </ListItemIcon>
                             <ListItemText primary={text} />
+                            {isNotificationComponent(index)}
                         </ListItem>
                     ))}
                 </List>
