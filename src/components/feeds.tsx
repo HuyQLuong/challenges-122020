@@ -29,11 +29,8 @@ export default function Feeds() {
                         return (
                             <ListItem key={idx} className={classes.color}>
                                 <ListItemText
-                                    primary={
-                                        feed.type === "add"
-                                            ? `Issue #${feed.id}: ${feed.title} was highlighted`
-                                            : `Highlighted issue #${feed.id}: ${feed.title} was removed`
-                                    }
+                                    primary={feed.title}
+                                    secondary={feed.created_at.split("T")[0]}
                                 />
                             </ListItem>
                         );

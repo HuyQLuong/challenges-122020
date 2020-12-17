@@ -37,14 +37,14 @@ const resetNotificationNumber = () => {
 };
 
 export const setHighlightFeedsAction = (issue: any) => (dispatch: any) => {
-    const feedIssue = getNotificationInfo(issue, "add");
-    dispatch(addFeed(feedIssue));
+    issue["type"] = "add";
+    dispatch(addFeed(issue));
     dispatch(increaseNotificationNumber());
 };
 
 export const removeHighlightFeedsAction = (issue: any) => (dispatch: any) => {
-    const feedIssue = getNotificationInfo(issue, "remove");
-    dispatch(addFeed(feedIssue));
+    issue["type"] = "remove";
+    dispatch(addFeed(issue));
     dispatch(decreaseNotificationNumber());
 };
 
