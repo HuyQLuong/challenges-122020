@@ -22,19 +22,22 @@ export default function Feeds() {
     return (
         <div className={classes.root}>
             <List>
-                {feeds.map((feed: any, idx: any) => {
-                    return (
-                        <ListItem key={idx} className={classes.color}>
-                            <ListItemText
-                                primary={
-                                    feed.type === "add"
-                                        ? `Issue #${feed.id}: ${feed.title} was highlighted`
-                                        : `Highlighted issue #${feed.id}: ${feed.title} was removed`
-                                }
-                            />
-                        </ListItem>
-                    );
-                })}
+                {feeds
+                    .slice(0)
+                    .reverse()
+                    .map((feed: any, idx: any) => {
+                        return (
+                            <ListItem key={idx} className={classes.color}>
+                                <ListItemText
+                                    primary={
+                                        feed.type === "add"
+                                            ? `Issue #${feed.id}: ${feed.title} was highlighted`
+                                            : `Highlighted issue #${feed.id}: ${feed.title} was removed`
+                                    }
+                                />
+                            </ListItem>
+                        );
+                    })}
             </List>
         </div>
     );
