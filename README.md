@@ -4,43 +4,72 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Available Scripts
 
-In the project directory, you can run:
+`yarn start` to start the project
 
-### `yarn start`
+Every commit to branch `master` will automatically deploy to heroku apps
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Stack
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+ - React + Typescript
+ - Redux-thunk
+ - Material-ui
+ 
+## Technical decision 
 
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+  ### 1. How did you implement styling? What are the pros and cons? Why did you chose this approach?
+  I am using Material-ui styling. The reason is it provide many ready-to-use component and speed up development time.
+  
+  **Pros**: 
+  - Easy and ready to use components
+  - Well-structured with CSS-API
+  
+  **Cons** 
+  - Override issue
+  - Problem with style nested components
+  
+  ### 2. How did you share state between components? What are the pros and cons? Why did you chose this approach?
+  - Any to any: I share by store
+  - Parent to Child: I share by props
+  
+  **Pros**:
+  - Sharing by store make everything concentrate to store and make data inconsistent
+  - Sharing by props could well-controlled state of child component
+  
+  **Cons**:
+  - Sharing by store could cause some unexpected side effect
+  - A lot of action need to be provided
+  - Can not avoid some redundant render
+  
+  ### 3. Did you use React hooks? Why or why not?
+  
+  I used React Hooks because it was easy to use and make the code cleanner, easier to understand, advoiding "wrapper hells"
+  
+  ### 4. What would you improve?
+  
+  In this project, I would like to minimize number of api call. All data will be recorded at store and reuse whenever it coudl
+  For the next phase of this project, data schemas should be applied to confirm the correction of api. I will continuously the eliminate redundant renders
+  
+  ### 5. How did you prevent wasted renders?
+  
+  - Sepearate and isolate small component
+  - Design a good redux store
+  - Reduce unessesary variable and data used in each component
+  - Using react.memo (did not apply at this moment)
+  
+  ### 6. How did you handle side-effects (e.g. data fetching)? What are the pros and cons? Why did you chose this approach?
+  
+  - Design a good redux store
+  - Seperate into small component
+  - Use react-hook useSelect to subcribe to the correct field in store
+  - Use react-hook useEffect to handle side effect (at this project, currently I do not need much due to above solution)
+  
+  **Pros**:
+  
+  - Handle side effect succesfully
+  - Side effect could be tracking well
+  
+  **Cons**:
+  
+  - The relation between components can make some anti patterns
+  - Adjusting structure redux store can affect to all the project
+  
