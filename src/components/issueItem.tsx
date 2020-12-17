@@ -47,7 +47,6 @@ export default function IssueItem(props: any) {
     }, [isHighlighted]);
 
     const onHighlightIssue = (idx: any) => {
-        console.log(idx);
         if (isHighlighted === true) {
             dispatch(removeHighlightIssueAction(idx));
         } else {
