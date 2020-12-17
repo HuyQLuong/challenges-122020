@@ -3,14 +3,6 @@ export const INCREASE_NOTIFICATION_NUMBER = "INCREASE_NOTIFICATION_NUMBER";
 export const RESET_NOTIFICATION_NUMBER = "RESET_NOTIFICATION_NUMBER";
 export const DECREASE_NOTIFICATION_NUMBER = "DECREASE_NOTIFICATION_NUMBER";
 
-const getNotificationInfo = (issue: any, type: any) => {
-    return {
-        id: issue.id,
-        title: issue.title,
-        type: type,
-    };
-};
-
 const addFeed = (feed: any) => {
     return {
         type: ADD_FEED,

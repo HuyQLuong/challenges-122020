@@ -15,6 +15,8 @@ import PriorityHighIcon from "@material-ui/icons/PriorityHigh";
 import Issues from "./issues";
 import Feeds from "./feeds";
 import Notification from "./notification";
+import { useDispatch } from "react-redux";
+import { clearNotificationAction } from "actions/feeds";
 
 const drawerWidth = 240;
 
@@ -45,11 +47,13 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function Drawers() {
     const classes = useStyles();
+    const dispatch = useDispatch();
 
     const [menuIndex, setMenuIndex] = useState(0);
     const onClickMenu = (index: number) => {
         if (index === 1) {
             setMenuIndex(1);
+            dispatch(clearNotificationAction());
         } else {
             setMenuIndex(0);
         }
