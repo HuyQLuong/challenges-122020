@@ -62,7 +62,7 @@ export default function Issues() {
                     })}
             </List>
             <Pagination
-                count={issuesLength / 5 > 50 ? issuesLength : 10}
+                count={issuesLength < 5 ? 1 : issuesLength / 5 + 1}
                 page={page}
                 onChange={handleChange}
             />
