@@ -1,11 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { ListItem, ListItemText } from "@material-ui/core";
 import { createStyles, Theme, makeStyles } from "@material-ui/core/styles";
-import {
-    removeHighlightFeedsAction,
-    setHighlightFeedsAction,
-} from "actions/feeds";
+import { setHighlightFeedsAction } from "actions/feeds";
 import {
     removeHighlightIssueAction,
     setHighlightIssueAction,
@@ -35,22 +32,26 @@ export default function IssueItem(props: any) {
     const classes = useStyles();
 
     const issue = props.issue;
-    const idx = props.idx;
     const page = props.page;
+    const idx = props.idx + (page - 1) * 5;
 
-    const highlightIndex = useSelector(
-        (state: any) => state.issues.highlightIndex,
+    const isHighlighted = useSelector(
+        (state: any) => state.issues.highlightIndex[idx],
         shallowEqual
     );
 
+    useEffect(() => {
+        if (isHighlighted === true) {
+            dispatch(setHighlightFeedsAction(issue));
+        }
+    }, [isHighlighted]);
+
     const onHighlightIssue = (idx: any) => {
         console.log(idx);
-        if (highlightIndex.length > 0 && highlightIndex.includes(idx)) {
+        if (isHighlighted === true) {
             dispatch(removeHighlightIssueAction(idx));
-            dispatch(removeHighlightFeedsAction(issue));
         } else {
             dispatch(setHighlightIssueAction(idx));
-            dispatch(setHighlightFeedsAction(issue));
         }
     };
 
@@ -58,12 +59,9 @@ export default function IssueItem(props: any) {
         <ListItem
             key={idx}
             className={
-                highlightIndex.length > 0 &&
-                highlightIndex.includes(idx + (page - 1) * 5)
-                    ? classes.highlightColor
-                    : classes.color
+                isHighlighted === true ? classes.highlightColor : classes.color
             }
-            onClick={() => onHighlightIssue(idx + (page - 1) * 5)}
+            onClick={() => onHighlightIssue(idx)}
         >
             <ListItemText
                 primary={issue.title}

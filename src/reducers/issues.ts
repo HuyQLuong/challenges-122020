@@ -6,6 +6,21 @@ import {
     REMOVE_HIGHLIGHT,
 } from "actions/issues";
 
+const addHighlight = (highlightList: any, index: any) => {
+    const isAnyHighlight = highlightList.filter(
+        (isHighlight) => isHighlight === true
+    );
+    if (isAnyHighlight.length === 0) {
+        highlightList[index] = true;
+    }
+    return highlightList;
+};
+
+const removeHighlight = (highlightList: any, index: any) => {
+    highlightList[index] = false;
+    return highlightList;
+};
+
 export default (
     state = {
         issueList: [],
@@ -21,9 +36,18 @@ export default (
         case GET_ISSUES:
             const issues = action.payload;
             const newIssuesState = [...state.issueList, ...issues];
+            const newHighlihgtIssue = Array.from(
+                { length: 5 },
+                (i) => (i = false)
+            );
+            const newHighlightIndexState = [
+                ...state.highlightIndex,
+                ...newHighlihgtIssue,
+            ];
             return {
                 ...state,
                 issueList: newIssuesState,
+                highlightIndex: newHighlightIndexState,
             };
         case UPDATE_PAGE:
             const page = action.payload;
@@ -33,21 +57,25 @@ export default (
             };
         case SET_HIGHLIGHT:
             const setHighlightIndex = action.payload;
-            const setHighlightIndexState = Array.from(
-                new Set([...state.highlightIndex, setHighlightIndex])
+            let setHighlightCloneState = [...state.highlightIndex];
+            const setHighlightNewState = addHighlight(
+                setHighlightCloneState,
+                setHighlightIndex
             );
             return {
                 ...state,
-                highlightIndex: setHighlightIndexState,
+                highlightIndex: setHighlightNewState,
             };
         case REMOVE_HIGHLIGHT:
             const removeHighlightIndex = action.payload;
-            const removeHighlightIndexState = state.highlightIndex.filter(
-                (idx) => idx !== removeHighlightIndex
+            let removeHighligthCloneState = [...state.highlightIndex];
+            const removeHighlightNewState = removeHighlight(
+                removeHighligthCloneState,
+                removeHighlightIndex
             );
             return {
                 ...state,
-                highlightIndex: removeHighlightIndexState,
+                highlightIndex: removeHighlightNewState,
             };
         default:
             return state;

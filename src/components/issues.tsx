@@ -32,7 +32,6 @@ export default function Issues() {
     }, [issues, issuesLength]);
 
     const handleChange = (event: any, value: any) => {
-        console.log(value);
         const firstItem = value * 5 - 5;
         const lastItem = value * 5 - 1;
         if (value > page && value > 1) {
